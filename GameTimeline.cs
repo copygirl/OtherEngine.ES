@@ -76,7 +76,7 @@ namespace OtherEngine.ES
 		public ComponentTimeline<TComponent> GetOrCreateTimeline<TComponent>(Entity entity)
 			where TComponent : struct, IComponent
 		{
-			return GetComponentData<TComponent>()?.GetOrCreate(entity);
+			return GetOrCreateComponentData<TComponent>().GetOrCreate(entity);
 		}
 
 		#endregion
