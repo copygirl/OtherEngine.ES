@@ -99,6 +99,23 @@ namespace OtherEngine.ES
 			GetOrCreateTimeline<TComponent>(entity)?.Set(time, value);
 		}
 
+
+		/// <summary> Sets the component value for type TComponent
+		///           on the specified entity at the specified time. </summary>
+		public void Set<TComponent>(Entity entity, GameTime time, TComponent value)
+			where TComponent : struct, IComponent
+		{
+			Set(entity, time, (TComponent?)value);
+		}
+
+		/// <summary> Removes the component value for type TComponent
+		///           on the specified entity at the specified time. </summary>
+		public void Remove<TComponent>(Entity entity, GameTime time)
+			where TComponent : struct, IComponent
+		{
+			Set(entity, time, (TComponent?)null);
+		}
+
 		#endregion
 
 		#region Entity related
