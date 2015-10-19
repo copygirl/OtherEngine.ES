@@ -129,14 +129,19 @@ namespace OtherEngine.ES
 
 		public override string ToString()
 		{
-			var h = Ticks / (TicksPerSecond * 60 * 60);
-			var m = (Ticks / (TicksPerSecond * 60)) % (24 * 60);
-			var s = (Ticks / TicksPerSecond) % (24 * 60 * 60);
-			var ms = (Ticks * 1000 / TicksPerSecond) % 1000;
+			var h = Math.Abs(Ticks / (TicksPerSecond * 60 * 60));
+			var m = Math.Abs((Ticks / (TicksPerSecond * 60)) % (24 * 60));
+			var s = Math.Abs((Ticks / TicksPerSecond) % (24 * 60 * 60));
+			var ms = Math.Abs((Ticks * 1000 / TicksPerSecond) % 1000);
 
-			var sb = new StringBuilder('[');
-			sb.AppendFormat("{0}:{1:00}:{2:00}", h, m, s);
-			if (ms != 0) sb.AppendFormat(".{0:000}", ms);
+			var sb = new StringBuilder("[");
+
+			if (Ticks < 0) sb.Append('-');               // If negative, add the sign.
+			if (h == 0) sb.Append(m);                    // If less than an hour, output in format "m:ss".
+			else sb.AppendFormat("{0}:{1:00}", h, m);    // Otherwise output in format "h:mm:ss".
+			sb.AppendFormat(":{0:00}", s);               // Append the seconds.
+			if (ms > 0) sb.AppendFormat(".{0:000}", ms); // If there's milliseconds to display, add them.
+
 			return sb.Append(']').ToString();
 		}
 
