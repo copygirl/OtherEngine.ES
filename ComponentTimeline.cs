@@ -38,11 +38,12 @@ namespace OtherEngine.ES
 					newFrame.Next = frame.Next;
 					newFrame.Previous = frame;
 
-					if (frame.Next != null)
-						frame.Next.Previous = newFrame;
-					frame.Next = newFrame;
-					Count++;
+					if (frame.Next == null) Last = newFrame;
+					else frame.Next.Previous = newFrame;
 
+					frame.Next = newFrame;
+
+					Count++;
 					return;
 				}
 
@@ -52,20 +53,23 @@ namespace OtherEngine.ES
 					newFrame.Next = frame.Next;
 					newFrame.Previous = frame.Previous;
 
-					if (frame.Next != null)
-						frame.Next.Previous = newFrame;
-					if (frame.Previous != null)
-						frame.Previous.Next = newFrame;
+					if (frame.Next == null) Last = newFrame;
+					else frame.Next.Previous = newFrame;
+
+					if (frame.Previous == null) First = newFrame;
+					else frame.Previous.Next = newFrame;
 					
 					return;
 				}
 			}
 
 			newFrame.Next = First;
-			if (First != null)
-				First.Previous = newFrame;
-			else Last = newFrame;
+
+			if (First == null) Last = newFrame;
+			else First.Previous = newFrame;
+
 			First = newFrame;
+
 			Count++;
 		}
 
