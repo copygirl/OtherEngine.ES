@@ -74,7 +74,18 @@ namespace OtherEngine.ES
 
 		#endregion
 
-		#region Arithmetic operators
+		#region Arithmetic (and unary +/-) operators
+
+		public static GameTime operator +(GameTime time)
+		{
+			return time;
+		}
+
+		public static GameTime operator -(GameTime time)
+		{
+			return new GameTime(-time.Ticks);
+		}
+
 
 		public static GameTime operator +(GameTime left, GameTime right)
 		{
@@ -84,6 +95,17 @@ namespace OtherEngine.ES
 		public static GameTime operator -(GameTime left, GameTime right)
 		{
 			return new GameTime(left.Ticks - right.Ticks);
+		}
+
+
+		public static GameTime operator *(GameTime time, double factor)
+		{
+			return new GameTime((long)(time.Ticks * factor));
+		}
+
+		public static GameTime operator /(GameTime time, double factor)
+		{
+			return new GameTime((long)(time.Ticks / factor));
 		}
 
 		#endregion
