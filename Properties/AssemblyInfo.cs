@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 [assembly: AssemblyProduct("OtherEngine")]
 [assembly: AssemblyTitle("OtherEngine.ES")]
@@ -11,4 +12,6 @@
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
+
+[assembly: CLSCompliant(true)]
 
