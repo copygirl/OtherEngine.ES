@@ -41,9 +41,11 @@
     <Compile Include="Timeline\GameTimeline.cs" />
     <Compile Include="Timeline\GameTime.cs" />
     <Compile Include="Timeline\IInterpolatable.cs" />
+    <Compile Include="Utility\ComponentUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Timeline\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
 </Project>
