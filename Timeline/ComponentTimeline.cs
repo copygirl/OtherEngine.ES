@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OtherEngine.ES
+namespace OtherEngine.ES.Timeline
 {
 	/// <summary> Holds information about the value of a component on an entity
 	///           at different moments in time, including past and future. This

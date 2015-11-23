@@ -36,11 +36,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="IInterpolatable.cs" />
-    <Compile Include="GameTime.cs" />
-    <Compile Include="GameTimeline.cs" />
-    <Compile Include="ComponentTimeline.cs" />
-    <Compile Include="ComponentData.cs" />
+    <Compile Include="Timeline\ComponentData.cs" />
+    <Compile Include="Timeline\ComponentTimeline.cs" />
+    <Compile Include="Timeline\GameTimeline.cs" />
+    <Compile Include="Timeline\GameTime.cs" />
+    <Compile Include="Timeline\IInterpolatable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Timeline\" />
+  </ItemGroup>
 </Project>

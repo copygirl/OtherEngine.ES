@@ -1,5 +1,5 @@
 ﻿
-namespace OtherEngine.ES
+namespace OtherEngine.ES.Timeline
 {
 	/// <summary> Interface for components which support linear interpolation.
 	///           Allows for smoothing out values in-between two keyframes of

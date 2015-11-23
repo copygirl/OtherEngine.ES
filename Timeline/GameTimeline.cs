@@ -3,12 +3,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OtherEngine.ES
+namespace OtherEngine.ES.Timeline
 {
 	// Heavily inspired by the "curves" approach from Planetary Annihilation:
 	// http://forrestthewoods.com/the-tech-of-planetary-annihilation-chronocam/
 
-	/// <summary> Main class which stores game information in a timeline data structure.
+	/// <summary> Entity container which stores game information in a timeline data structure.
 	///           Using it, components may be associated with entities at specified times. </summary>
 	public class GameTimeline
 	{

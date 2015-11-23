@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace OtherEngine.ES
+namespace OtherEngine.ES.Timeline
 {
 	/// <summary> Represents a specific absolute or
 	///           relative time in the GameTimeline. </summary>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OtherEngine.ES
+namespace OtherEngine.ES.Timeline
 {
 	/// <summary> Holds information on a specific component type in the GameTimeline.
 	///           This includes the ComponentTimelines for entities that own this component. </summary>
