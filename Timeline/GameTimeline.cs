@@ -15,8 +15,6 @@ namespace OtherEngine.ES.Timeline
 		readonly ConcurrentDictionary<Type, IComponentData> _data =
 			new ConcurrentDictionary<Type, IComponentData>();
 
-		readonly ConcurrentBag<Type> _componentTypes = new ConcurrentBag<Type>();
-
 
 		#region Getting ComponentData
 
@@ -39,17 +37,7 @@ namespace OtherEngine.ES.Timeline
 			where TComponent : struct, IComponent
 		{
 			return (ComponentData<TComponent>)_data.GetOrAdd(
-				typeof(TComponent), CreateComponentData<TComponent>);
-		}
-
-
-		/// <summary> Creates a ComponentData for type TComponent and
-		///           adds the type to the collection of component types. </summary>
-		ComponentData<TComponent> CreateComponentData<TComponent>(Type componentType)
-			where TComponent : struct, IComponent
-		{
-			_componentTypes.Add(componentType);
-			return new ComponentData<TComponent>();
+				typeof(TComponent), type => new ComponentData<TComponent>());
 		}
 
 		#endregion
@@ -124,7 +112,7 @@ namespace OtherEngine.ES.Timeline
 		///           information about the specified entity. </summary>
 		public IEnumerable<IComponentTimeline> GetAllTimelines(Entity entity)
 		{
-			return _componentTypes
+			return _data.Keys
 				.Select(type => GetTimeline(entity, type))
 				.Where(timeline => (timeline != null));
 		}
