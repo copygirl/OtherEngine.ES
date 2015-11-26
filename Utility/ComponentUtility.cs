@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace OtherEngine.ES.Utility
 {
 	public static class ComponentUtility
 	{
+		static readonly Regex _componentSuffix = new Regex("Component$");
+
+
 		/// <summary> Returns if the specified type is a valid component. </summary>
 		public static bool IsValid(IComponent component)
 		{
@@ -18,7 +22,14 @@ namespace OtherEngine.ES.Utility
 				throw new ArgumentNullException(paramName);
 			if (!(component is ValueType))
 				throw new ArgumentException(string.Format(
-					"{0} is not a struct", component.GetType()), paramName);
+					"{0} is not a struct", ToStringInternal(component.GetType())), paramName);
+		}
+
+		/// <summary> Returns a string representation of the component's type. </summary>
+		public static string ToString(IComponent component)
+		{
+			Validate(component);
+			return ToStringInternal(component.GetType());
 		}
 
 
@@ -36,10 +47,33 @@ namespace OtherEngine.ES.Utility
 				throw new ArgumentNullException(paramName);
 			if (!typeof(IComponent).IsAssignableFrom(componentType))
 				throw new ArgumentException(string.Format(
-					"{0} is not an IComponent", componentType), paramName);
+					"{0} is not an IComponent", ToStringInternal(componentType)), paramName);
 			if (!componentType.IsValueType)
 				throw new ArgumentException(string.Format(
-					"{0} is not a struct", componentType), paramName);
+					"{0} is not a struct", ToStringInternal(componentType)), paramName);
+		}
+
+		/// <summary> Returns a string representation of the component type. </summary>
+		public static string ToString(Type componentType)
+		{
+			Validate(componentType);
+			return ToStringInternal(componentType);
+		}
+
+		/// <summary> Returns if the specified component type's
+		///           name is valid (ends with "Component"). </summary>
+		public static bool IsValidName(Type componentType)
+		{
+			Validate(componentType);
+			return ((componentType.Name.Length > 9) &&
+				_componentSuffix.IsMatch(componentType.Name));
+		}
+
+
+		static string ToStringInternal(Type componentType)
+		{
+			return string.Format("[Component {0}]",
+				_componentSuffix.Replace(componentType.ToString(), ""));
 		}
 	}
 }
