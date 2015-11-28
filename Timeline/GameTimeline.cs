@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using OtherEngine.ES.Utility;
 
 namespace OtherEngine.ES.Timeline
 {
@@ -9,7 +10,7 @@ namespace OtherEngine.ES.Timeline
 	// http://forrestthewoods.com/the-tech-of-planetary-annihilation-chronocam/
 
 	/// <summary> Entity container which stores game information in a timeline data structure.
-	///           Using it, components may be associated with entities at specified times. </summary>
+	///           Using it, components may be associated with entities at specific times. </summary>
 	public class GameTimeline
 	{
 		readonly ConcurrentDictionary<Type, IComponentData> _data =
@@ -19,17 +20,18 @@ namespace OtherEngine.ES.Timeline
 		#region Getting ComponentData
 
 		/// <summary> Returns the ComponentData for the specified component type, null if none. </summary>
+		/// <exception cref="ArgumentException"> Thrown if componentType is not a valid component type. </exception>
 		public IComponentData GetComponentData(Type componentType)
 		{
-			IComponentData data;
-			return (_data.TryGetValue(componentType, out data) ? data : null);
+			ComponentUtility.Validate(componentType);
+			return GetComponentDataInternal(componentType);
 		}
 
 		/// <summary> Returns the ComponentData for type TComponent, null if none. </summary>
 		public ComponentData<TComponent> GetComponentData<TComponent>()
 			where TComponent : struct, IComponent
 		{
-			return (ComponentData<TComponent>)GetComponentData(typeof(TComponent));
+			return (ComponentData<TComponent>)GetComponentDataInternal(typeof(TComponent));
 		}
 
 		/// <summary> Returns the ComponentData for type TComponent, creating it if necessary. </summary>
@@ -40,12 +42,19 @@ namespace OtherEngine.ES.Timeline
 				typeof(TComponent), type => new ComponentData<TComponent>());
 		}
 
+
+		IComponentData GetComponentDataInternal(Type componentType)
+		{
+			IComponentData data;
+			return (_data.TryGetValue(componentType, out data) ? data : null);
+		}
+
 		#endregion
 
 		#region Getting ComponentTimeline
 
-		/// <summary> Returns the ComponentTimeline for the specified
-		///           entity and component type, or null if none. </summary>
+		/// <summary> Returns the ComponentTimeline for the specified entity and component type, or null if none. </summary>
+		/// <exception cref="ArgumentException"> Thrown if componentType is not a valid component type. </exception>
 		public IComponentTimeline GetTimeline(Entity entity, Type componentType)
 		{
 			return GetComponentData(componentType)?.Get(entity);
