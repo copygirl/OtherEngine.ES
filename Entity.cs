@@ -9,8 +9,12 @@ namespace OtherEngine.ES
 		public Guid ID { get; private set; }
 
 
-		public Entity() {
-			ID = Guid.NewGuid();
+		public Entity(Guid id) { ID = id; }
+
+
+		public static Entity New()
+		{
+			return new Entity(Guid.NewGuid());
 		}
 
 
