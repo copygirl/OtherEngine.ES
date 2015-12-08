@@ -42,10 +42,15 @@
     <Compile Include="Timeline\GameTime.cs" />
     <Compile Include="Timeline\IInterpolatable.cs" />
     <Compile Include="Utility\ComponentUtility.cs" />
+    <Compile Include="Interfaces\IComponentBag.cs" />
+    <Compile Include="Interfaces\IComponentGrouping.cs" />
+    <Compile Include="Interfaces\EntityComponentPair.cs" />
+    <Compile Include="Interfaces\IEntityComponentAccess.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Timeline\" />
     <Folder Include="Utility\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>
