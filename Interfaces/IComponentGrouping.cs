@@ -15,7 +15,7 @@ namespace OtherEngine.ES.Interfaces
 
 		/// <summary> Sets the component value associated with the specified
 		///           entity, returning the old value, or null if none. </summary>
-		TComponent? Set(Entity entity, TComponent? component);
+		TComponent? Set(Entity entity, TComponent? value);
 	}
 
 	/// <summary> Associates components of a single type to various entities. </summary>
@@ -33,7 +33,7 @@ namespace OtherEngine.ES.Interfaces
 		///           entity, returning the old value, or null if none. </summary>
 		/// <exception cref="ArgumentException">
 		///   Thrown if the specified component isn't of type ComponentType or null. </exception>
-		IComponent Set(Entity entity, IComponent component);
+		IComponent Set(Entity entity, IComponent value);
 	}
 }
 
