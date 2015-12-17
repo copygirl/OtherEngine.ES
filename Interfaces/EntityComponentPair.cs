@@ -13,12 +13,12 @@ namespace OtherEngine.ES.Interfaces
 	{
 		public Entity Entity { get; private set; }
 
-		public TComponent Component { get; private set; }
+		public TComponent? Component { get; private set; }
 
 		IComponent IEntityComponentPair.Component { get { return Component; } }
 
 
-		public EntityComponentPair(Entity entity, TComponent component)
+		public EntityComponentPair(Entity entity, TComponent? component)
 		{
 			Entity = entity;
 			Component = component;
