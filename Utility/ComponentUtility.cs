@@ -77,7 +77,7 @@ namespace OtherEngine.ES.Utility
 
 		/// <summary> Validates that the specified component is of the specified
 		///           component type, throwing an exception if it doesn't match. </summary>
-		public static bool CheckType(Type componentType, IComponent component,
+		public static void CheckType(Type componentType, IComponent component,
 			string paramName = "component", bool allowNull = true)
 		{
 			if (!allowNull && (component == null))
@@ -89,11 +89,11 @@ namespace OtherEngine.ES.Utility
 
 		/// <summary> Validates that the specified component is of type
 		///           TComponent, throwing an exception if it doesn't match. </summary>
-		public static bool CheckType<TComponent>(IComponent component,
+		public static void CheckType<TComponent>(IComponent component,
 			string paramName = "component", bool allowNull = true)
 			where TComponent : struct, IComponent
 		{
-			return CheckType(typeof(TComponent), component, paramName);
+			CheckType(typeof(TComponent), component, paramName);
 		}
 
 		#endregion
