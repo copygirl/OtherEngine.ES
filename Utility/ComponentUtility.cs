@@ -5,8 +5,7 @@ namespace OtherEngine.ES.Utility
 {
 	public static class ComponentUtility
 	{
-		static readonly Regex _componentSuffix = new Regex("Component$");
-
+		#region Component validation
 
 		/// <summary> Returns if the specified type is a valid component. </summary>
 		public static bool IsValid(IComponent component)
@@ -32,6 +31,9 @@ namespace OtherEngine.ES.Utility
 			return ToStringInternal(component.GetType());
 		}
 
+		#endregion
+
+		#region Component type validation
 
 		/// <summary> Returns if the specified type is a valid component type. </summary>
 		public static bool IsValid(Type componentType)
@@ -69,12 +71,45 @@ namespace OtherEngine.ES.Utility
 				_componentSuffix.IsMatch(componentType.Name));
 		}
 
+		#endregion
+
+		#region Correct type validation
+
+		/// <summary> Validates that the specified component is of the specified
+		///           component type, throwing an exception if it doesn't match. </summary>
+		public static bool CheckType(Type componentType, IComponent component,
+			string paramName = "component", bool allowNull = true)
+		{
+			if (!allowNull && (component == null))
+				throw new ArgumentNullException(paramName);
+			if ((component != null) && (component.GetType() != componentType))
+				throw new ArgumentException(string.Format("{0} expected, got {1}",
+					ToString(componentType), ToString(component)), paramName);
+		}
+
+		/// <summary> Validates that the specified component is of type
+		///           TComponent, throwing an exception if it doesn't match. </summary>
+		public static bool CheckType<TComponent>(IComponent component,
+			string paramName = "component", bool allowNull = true)
+			where TComponent : struct, IComponent
+		{
+			return CheckType(typeof(TComponent), component, paramName);
+		}
+
+		#endregion
+
+
+		#region Private members
+
+		static readonly Regex _componentSuffix = new Regex("Component$");
 
 		static string ToStringInternal(Type componentType)
 		{
 			return string.Format("[Component {0}]",
 				_componentSuffix.Replace(componentType.ToString(), ""));
 		}
+
+		#endregion
 	}
 }
 
