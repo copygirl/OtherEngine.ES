@@ -53,4 +53,10 @@
     <Folder Include="Utility\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OtherEngine.Utility\OtherEngine.Utility.csproj">
+      <Project>{0CCC3EF8-30D8-4F24-9C12-3459AB7F11FD}</Project>
+      <Name>OtherEngine.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using OtherEngine.ES.Utility;
+using OtherEngine.Utility;
 
 namespace OtherEngine.ES.Timeline
 {
@@ -15,6 +16,15 @@ namespace OtherEngine.ES.Timeline
 	{
 		readonly ConcurrentDictionary<Type, IComponentData> _data =
 			new ConcurrentDictionary<Type, IComponentData>();
+
+
+		public IReadOnlyCollection<Type> ComponentTypes { get; private set; }
+
+
+		public GameTimeline()
+		{
+			ComponentTypes = _data.Keys.AsReadOnly();
+		}
 
 
 		#region Getting ComponentData
