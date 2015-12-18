@@ -46,6 +46,7 @@
     <Compile Include="Interfaces\IComponentGrouping.cs" />
     <Compile Include="Interfaces\EntityComponentPair.cs" />
     <Compile Include="Interfaces\IEntityComponentAccess.cs" />
+    <Compile Include="Timeline\GameTimelineFrame.cs" />
     <Compile Include="Interfaces\ComponentBagProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

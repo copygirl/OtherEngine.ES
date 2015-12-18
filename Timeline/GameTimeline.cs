@@ -27,6 +27,14 @@ namespace OtherEngine.ES.Timeline
 		}
 
 
+		/// <summary> Returns an implementation of IEntityComponentAccess
+		///           that allows access to components at the specified time. </summary>
+		public GameTimelineFrame At(GameTime time)
+		{
+			return new GameTimelineFrame(this, time);
+		}
+
+
 		#region Getting ComponentData
 
 		/// <summary> Returns the ComponentData for the specified component type, null if none. </summary>
